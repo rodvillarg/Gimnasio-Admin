@@ -1,0 +1,62 @@
+<header class="barra">
+  <div class="barra__interior">
+    <span class="barra__marca">
+      <img src="/logo.svg" alt="" /> Gimnasio Titanes
+      <span class="barra__etiqueta">Admin</span>
+    </span>
+  </div>
+</header>
+
+<main class="pagina">
+    <div class="encabezado">
+        <h1>Catálogo de clases</h1>
+        <p>Estos datos son del archivo local</p>
+    </div>
+    <section class="resumen">
+        <div class="resumen__dato">
+            <span class="resumen__numero">{{ catalogo.visibles().length }}</span>
+            <span class="resumen__texto">clases en el catálogo</span>
+        </div>
+        <div class="resumen__dato">
+            <span class="resumen__numero">{{ catalogo.minutosTotales }}</span>
+            <span class="resumen__texto">minutos a la semana</span>
+        </div>
+        <div class="resumen__dato">
+            <span class="resumen__numero">{{ catalogo.clasesLargas() }}</span>
+            <span class="resumen__texto">clases de una hora o más</span>
+        </div>
+    </section>
+
+    <div class="acciones" style="margin-bottom: 1rem;">
+        <button class="boton boton--peligro" (click)="catalogo.vaciar()">Vaciar catálogo</button>
+        <button class="boton boton--secundario" (click)="catalogo.restaurar()">Restaurar catálogo</button>
+    </div>
+
+    <app-filtro-categoria>
+
+    </app-filtro-categoria>
+
+    <div class="tablero">
+      <div class="rejilla">
+          @for(clase of catalogo.visibles(); track clase.id){
+              <app-tarjeta-clase 
+                [clase]="clase"
+                [activa]="clase.id === catalogo.seleccionada()?.id"
+                (seleccionar)="catalogo.seleccionar($event)"
+              >
+              </app-tarjeta-clase>
+          } @empty {
+              <p class="vacio">No hay clases disponibles</p>
+          }
+      </div>
+
+      @if(catalogo.seleccionada(); as c){
+        <aside class="tarjeta lateral">
+          <img [src]="c.imagen" [alt]="c.nombre">
+          <h2>{{c.nombre}}</h2>
+          <p>{{c.descripcion}}</p>
+        </aside>
+      }
+    </div>
+
+</main>
