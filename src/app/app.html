@@ -1,0 +1,19 @@
+<header class="barra">
+  <div class="barra__interior">
+    <span class="barra__marca">
+      <img src="/logo.svg" alt="" /> Gimnasio Titanes
+      <span class="barra__etiqueta">Admin</span>
+    </span>
+     <nav class="barra__enlaces">
+      <a class="barra__enlace" routerLink="/clases" routerLinkActive= "barra__enlace--activo"> Clases </a>
+      <a class="barra__enlace" routerLink="/horarios" routerLinkActive= "barra__enlace--activo"> Horarios </a>
+      <a class="barra__enlace" routerLink="/miembros" routerLinkActive= "barra__enlace--activo"> Miembros </a>
+
+    </nav>
+  </div>
+
+</header>
+
+<main class="pagina">
+  <router-outlet/>
+</main>
